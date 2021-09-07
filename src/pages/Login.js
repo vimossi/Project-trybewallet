@@ -9,7 +9,6 @@ class Login extends React.Component {
           <input type="text" data-testid="password-input" />
           <button type="button">Entrar</button>
         </div>
-        );
       </fieldset>
     );
   }

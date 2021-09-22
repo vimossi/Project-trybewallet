@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchMoedas } from '../services/index';
+import fetchMoedas from '../services/index';
 import { recieveCurrencies } from '../actions/index';
 
 class Form extends React.Component {

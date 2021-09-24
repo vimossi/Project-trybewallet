@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Table from './Table';
 
 class Header extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class Header extends React.Component {
           <span>{this.getTotalExpenses()}</span>
         </p>
         <p data-testid="header-currency-field">Câmbio: BRL</p>
+        <Table />
       </header>
     );
   }

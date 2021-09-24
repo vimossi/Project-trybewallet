@@ -1,22 +1,59 @@
-// Coloque aqui suas actions
-import fetchMoedas from '../services';
+export const USER_EMAIL = 'USER_EMAIL';
+export const LOADING = 'LOADING';
+export const SAVED_MONEY = 'SAVED_MONEY';
+export const ERROR = 'ERROR';
+export const ADD_EXPENSES = 'ADD_EXPENSES';
 
-export const LOGIN = 'LOGIN';
-export const CURRENCIES = 'CURRENCIES';
-
-export const login = (email) => ({
-
-  type: LOGIN,
-  email,
+export const userAction = (state) => ({
+  type: USER_EMAIL,
+  state,
 });
 
-export const recieveCurrencies = (currencies) => ({
-  type: 'CURRENCIES',
-  currencies,
+export const loading = () => ({
+  type: LOADING,
 });
 
-export const addCurrenciesThunk = () => async (dispatch) => {
-  const currencies = await fetchMoedas();
-  delete currencies.USDT;
-  dispatch(recieveCurrencies(currencies));
+export const saveCoins = (payload) => ({
+  type: SAVED_MONEY,
+  payload,
+});
+
+export const errorMessage = (payload) => ({
+  type: ERROR,
+  payload,
+});
+
+export const addExpenses = (expense) => ({
+  type: ADD_EXPENSES,
+  payload: expense,
+});
+
+export const thunkAPI = () => async (dispatch) => {
+  const URL = 'https://economia.awesomeapi.com.br/json/all';
+  dispatch(loading());
+  try {
+    const response = await fetch(URL);
+    console.log(response);
+    const moedas = await response.json();
+    delete moedas.USDT;
+    dispatch(saveCoins(moedas));
+  } catch (error) {
+    console.log(error.message);
+    dispatch(errorMessage(error.message));
+  }
+};
+
+export const thunkADD = (expenses) => async (dispatch) => {
+  const URL = 'https://economia.awesomeapi.com.br/json/all';
+  dispatch(loading());
+  try {
+    const response = await fetch(URL);
+    const cotacao = await response.json();
+    delete cotacao.USDT;
+    expenses.exchangeRates = cotacao;
+    dispatch(addExpenses(expenses));
+  } catch (error) {
+    console.log(error.message);
+    dispatch(errorMessage(error.message));
+  }
 };

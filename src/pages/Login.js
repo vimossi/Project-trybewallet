@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { login } from '../actions';
+import { userAction } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -90,7 +90,7 @@ Login.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  teste: (value) => dispatch(login(value)),
+  teste: (value) => dispatch(userAction(value)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);

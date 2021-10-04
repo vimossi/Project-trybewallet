@@ -11,6 +11,7 @@ class Login extends React.Component {
       senha: '',
       emailValidation: false,
       passwordValidation: false,
+      totalExpenses: 0,
     };
     this.handleEmail = this.handleEmail.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
@@ -38,8 +39,8 @@ class Login extends React.Component {
   handleButtonClick(event) {
     event.preventDefault();
     const { teste, history } = this.props;
-    const { email } = this.state;
-    teste(email);
+    const { email, totalExpenses } = this.state;
+    teste(email, totalExpenses);
     history.push('./carteira');
   }
 
@@ -90,7 +91,7 @@ Login.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  teste: (value) => dispatch(userAction(value)),
+  teste: (value, totalExpenses) => dispatch(userAction(value, totalExpenses)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);

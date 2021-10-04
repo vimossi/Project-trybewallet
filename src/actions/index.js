@@ -4,6 +4,8 @@ export const SAVED_MONEY = 'SAVED_MONEY';
 export const ERROR = 'ERROR';
 export const ADD_EXPENSES = 'ADD_EXPENSES';
 
+export const LOGIN = 'LOGIN';
+
 export const userAction = (state) => ({
   type: USER_EMAIL,
   state,
@@ -26,6 +28,23 @@ export const errorMessage = (payload) => ({
 export const addExpenses = (expense) => ({
   type: ADD_EXPENSES,
   payload: expense,
+});
+
+export const login = (email, totalExpenses) => ({
+  type: LOGIN,
+  payload: {
+    email,
+    totalExpenses,
+  },
+});
+
+export const DELETE_EXPENSES = 'DELETE_EXPENSES';
+
+export const deleteExpenses = (id) => ({
+  type: DELETE_EXPENSES,
+  payload: {
+    id,
+  },
 });
 
 export const thunkAPI = () => async (dispatch) => {
